@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CasinoX</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-900 text-white font-sans">
+    <!-- Navbar -->
+    <header class="bg-gray-800 p-4 flex justify-between items-center shadow-md">
+      <h1 class="text-2xl font-bold text-yellow-400">CasinoX</h1>
+      <nav class="space-x-4">
+        <a href="#" class="hover:text-yellow-300">Ana Sayfa</a>
+        <a href="#" class="hover:text-yellow-300">Oyunlar</a>
+        <a href="#" class="hover:text-yellow-300">Promosyonlar</a>
+        <a href="#" class="hover:text-yellow-300">Canlı Destek</a>
+        <button
+          class="bg-yellow-400 text-black px-4 py-1 rounded hover:bg-yellow-300"
+        >
+          Giriş Yap
+        </button>
+        <button class="bg-green-500 px-4 py-1 rounded hover:bg-green-400">
+          Kayıt Ol
+        </button>
+      </nav>
+    </header>
+
+    <!-- Hero -->
+    <section
+      class="text-center py-16 bg-gradient-to-r from-yellow-500 via-red-500 to-pink-500"
+    >
+      <h2 class="text-4xl font-bold mb-4">
+        Hoş Geldin, Şansını Denemeye Hazır mısın?
+      </h2>
+      <p class="text-xl mb-6">%100 Hoşgeldin Bonusu seni bekliyor!</p>
+      <button
+        class="bg-black px-6 py-3 text-yellow-400 text-lg rounded hover:bg-gray-800"
+      >
+        Hemen Oyna
+      </button>
+    </section>
+
+    <!-- Oyun Kartları -->
+    <section
+      class="py-12 px-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
+    >
+      <!-- Kart -->
+      <div class="bg-gray-800 p-4 rounded-lg shadow hover:shadow-xl transition">
+        <img
+          src="https://via.placeholder.com/300x180"
+          class="rounded mb-3"
+          alt="Yazı Tura"
+        />
+        <h3 class="text-lg font-semibold">Yazı Tura</h3>
+        <button
+          class="yazıtura mt-2 bg-yellow-400 text-black px-4 py-2 rounded hover:bg-yellow-300"
+        >
+          Oyna
+        </button>
+      </div>
+
+      <div class="bg-gray-800 p-4 rounded-lg shadow hover:shadow-xl transition">
+        <img
+          src="https://via.placeholder.com/300x180"
+          class="rounded mb-3"
+          alt="Poker"
+        />
+        <h3 class="text-lg font-semibold">Texas Hold'em</h3>
+        <button
+          class="mt-2 bg-yellow-400 text-black px-4 py-2 rounded hover:bg-yellow-300"
+        >
+          Oyna
+        </button>
+      </div>
+
+      <div class="bg-gray-800 p-4 rounded-lg shadow hover:shadow-xl transition">
+        <img
+          src="https://via.placeholder.com/300x180"
+          class="rounded mb-3"
+          alt="Rulet"
+        />
+        <h3 class="text-lg font-semibold">Canlı Rulet</h3>
+        <button
+          class="mt-2 bg-yellow-400 text-black px-4 py-2 rounded hover:bg-yellow-300"
+        >
+          Oyna
+        </button>
+      </div>
+
+      <div class="bg-gray-800 p-4 rounded-lg shadow hover:shadow-xl transition">
+        <img
+          src="https://via.placeholder.com/300x180"
+          class="rounded mb-3"
+          alt="Blackjack"
+        />
+        <h3 class="text-lg font-semibold">Blackjack</h3>
+        <button
+          class="mt-2 bg-yellow-400 text-black px-4 py-2 rounded hover:bg-yellow-300"
+        >
+          Oyna
+        </button>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-center py-6 text-sm text-gray-400">
+      © 2025 CasinoX | 18+ | Lütfen Sorumlu Oynayın
+    </footer>
+
+    <script>
+      const yazıtura = document.querySelector(".yazıtura");
+      yazıtura.addEventListener("click", function () {
+        window.location.href = "yazıtura.html";
+      });
+    </script>
+  </body>
+</html>

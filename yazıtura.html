@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Yazı Tura | CasinoX</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-900 text-white min-h-screen flex flex-col">
+    <!-- Navbar -->
+    <header class="bg-gray-800 p-4 flex justify-between items-center shadow-md">
+      <h1 class="text-2xl font-bold text-yellow-400">CasinoX</h1>
+      <nav>
+        <a href="bet.html" class="hover:text-yellow-300">Ana Sayfa</a>
+      </nav>
+    </header>
+
+    <!-- Oyun Alanı -->
+    <main class="flex-1 flex flex-col items-center justify-center px-4">
+      <div
+        class="bg-gray-800 rounded-lg shadow-lg p-8 w-full max-w-md text-center"
+      >
+        <h2 class="text-3xl font-bold text-yellow-400 mb-4">Yazı Tura</h2>
+        <div id="game-area" class="mb-6">
+          <!-- Buraya JS ile oyun gelecek -->
+          <div class="flex justify-center mb-4">
+            <img
+              src="https://cdn-icons-png.flaticon.com/512/616/616490.png"
+              alt="Coin"
+              class="w-24 h-24"
+            />
+          </div>
+          <p class="text-lg text-gray-300">Tahminini seç ve şansını dene!</p>
+        </div>
+
+        <!-- Bahis Kontrolleri -->
+        <div class="mb-4 flex flex-col items-center">
+          <label for="bet-amount" class="mb-2 text-yellow-400 font-semibold"
+            >Bahis Miktarı:</label
+          >
+          <input
+            type="number"
+            id="bet-amount"
+            min="1"
+            value="10"
+            class="text-black px-4 py-2 rounded w-32 text-center"
+          />
+          <div id="balance" class="mt-2 text-gray-300">
+            Bakiye: <span id="balance-value">100</span>TL
+          </div>
+        </div>
+
+        <!-- Oyun Kontrolleri -->
+        <div id="controls" class="flex justify-center gap-4 mb-4">
+          <button
+            class="bg-yellow-400 text-black px-6 py-2 rounded hover:bg-yellow-300 font-semibold"
+            id="yazi-btn"
+          >
+            Yazı
+          </button>
+          <button
+            class="bg-yellow-400 text-black px-6 py-2 rounded hover:bg-yellow-300 font-semibold"
+            id="tura-btn"
+          >
+            Tura
+          </button>
+        </div>
+        <div id="result" class="text-xl font-bold mt-4"></div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-center py-6 text-sm text-gray-400 mt-auto">
+      © 2025 CasinoX | 18+ | Lütfen Sorumlu Oynayın
+      <script>
+        let balance = 100;
+        yazı = document.getElementById("yazi-btn");
+        tura = document.getElementById("tura-btn");
+        result = document.getElementById("result");
+        gameArea = document.getElementById("game-area");
+        const betInput = document.getElementById("bet-amount");
+        const balanceValue = document.getElementById("balance-value");
+
+        function coinSpinAnimation() {
+          gameArea.innerHTML = `
+            <div class="flex justify-center mb-4">
+              <img src="https://cdn-icons-png.flaticon.com/512/616/616490.png"
+                alt="Coin"
+                class="w-24 h-24 animate-spin"
+                style="animation-duration: 1s;"
+              />
+            </div>
+            <p class="text-lg text-gray-300">Para dönüyor...</p>
+          `;
+          result.textContent = "";
+        }
+
+        function playGame(playerChoice) {
+          const bet = parseInt(betInput.value, 10);
+          if (isNaN(bet) || bet < 1) {
+            result.textContent = "Lüten Geçerli bir bahis miktarı girin!";
+            return;
+          }
+          if (bet > balance) {
+            result.textContent = "Yeterli bakiyeniz yok!";
+            return;
+          }
+          coinSpinAnimation();
+          setTimeout(function () {
+            if (playerChoice === "Yazı") {
+              const outcome = Math.random() < 0.485 ? "Yazı" : "Tura";
+              if (outcome === playerChoice) {
+                balance += bet;
+                result.textContent = bet + "TL kazandınız!";
+                gameArea.innerHTML = `
+                  <div class="flex justify-center mb-4">
+                    <img src="https://cdn-icons-png.flaticon.com/512/616/616490.png"
+                      alt="Coin"
+                      class="w-24 h-24"
+                    />
+                  </div>
+                  <p class="text-lg text-gray-300">Kazandınız!</p>
+                `;
+              } else {
+                balance -= bet;
+                result.textContent = bet + "TL kaybettiniz!";
+                gameArea.innerHTML = `
+                  <div class="flex justify-center mb-4">
+                    <img src="https://cdn-icons-png.flaticon.com/512/616/616491.png"
+                      alt="Coin"
+                      class="w-24 h-24"
+                    />
+                  </div>
+                  <p class="text-lg text-gray-300">Kaybettiniz!</p>
+                `;
+              }
+            } else {
+              const outcome = Math.random() < 0.485 ? "Tura" : "Yazı";
+              if (outcome === playerChoice) {
+                balance += bet;
+                result.textContent = bet + "TL kazandınız!";
+                gameArea.innerHTML = `
+                  <div class="flex justify-center mb-4">
+                    <img src="https://cdn-icons-png.flaticon.com/512/616/616490.png"
+                      alt="Coin"
+                      class="w-24 h-24"
+                    />
+                  </div>
+                  <p class="text-lg text-gray-300">Kazandınız!</p>
+                `;
+              } else {
+                balance -= bet;
+                result.textContent = bet + "TL kaybettiniz!";
+                gameArea.innerHTML = `
+                  <div class="flex justify-center mb-4">
+                    <img src="https://cdn-icons-png.flaticon.com/512/616/616491.png"
+                      alt="Coin"
+                      class="w-24 h-24"
+                    />
+                  </div>
+                  <p class="text-lg text-gray-300">Kaybettiniz!</p>
+                `;
+              }
+            }
+            balanceValue.textContent = balance;
+          }, 1000);
+        }
+
+        yazı.addEventListener("click", function () {
+          playGame("Yazı");
+        });
+
+        tura.addEventListener("click", function () {
+          playGame("Tura");
+        });
+      </script>
+    </footer>
+  </body>
+</html>
