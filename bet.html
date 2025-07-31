@@ -80,9 +80,9 @@
           class="rounded mb-3"
           alt="Rulet"
         />
-        <h3 class="text-lg font-semibold">Canlı Rulet</h3>
+        <h3 class="text-lg font-semibold">Slot Machine</h3>
         <button
-          class="mt-2 bg-yellow-400 text-black px-4 py-2 rounded hover:bg-yellow-300"
+          class="slot-machine mt-2 bg-yellow-400 text-black px-4 py-2 rounded hover:bg-yellow-300"
         >
           Oyna
         </button>
@@ -110,8 +110,14 @@
 
     <script>
       const yazıtura = document.querySelector(".yazıtura");
+      const slotMachine = document.querySelector(".slot-machine");
+
       yazıtura.addEventListener("click", function () {
         window.location.href = "yazıtura.html";
+      });
+
+      slotMachine.addEventListener("click", function () {
+        window.location.href = "slot-machine.html";
       });
     </script>
   </body>
