@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Slot Machine | CasinoX</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-900 text-white min-h-screen flex flex-col">
+    <!-- Navbar -->
+    <header class="bg-gray-800 p-4 flex justify-between items-center shadow-md">
+      <h1 class="text-2xl font-bold text-yellow-400">CasinoX</h1>
+      <nav>
+        <a href="bet.html" class="hover:text-yellow-300">Ana Sayfa</a>
+      </nav>
+    </header>
+
+    <!-- Slot Machine Alanı -->
+    <main class="flex-1 flex flex-col items-center justify-center px-4">
+      <div
+        class="bg-gray-800 rounded-lg shadow-lg p-8 w-full max-w-md text-center"
+      >
+        <h2 class="text-3xl font-bold text-yellow-400 mb-4">Slot Machine</h2>
+        <div class="reels flex justify-center gap-4 text-5xl font-bold mb-6">
+          <div id="reel1">🍒</div>
+          <div id="reel2">🍋</div>
+          <div id="reel3">🍉</div>
+        </div>
+        <div class="mb-4 flex flex-col items-center">
+          <label for="slotBet" class="mb-2 text-yellow-400 font-semibold"
+            >Bahis Miktarı:</label
+          >
+          <input
+            id="slotBet"
+            type="number"
+            min="1"
+            value="10"
+            class="text-black px-4 py-2 rounded w-32 text-center"
+            placeholder="Bahis (TL)"
+          />
+          <div class="mt-2 text-gray-300">
+            Bakiye: <span id="slotBalance">1000</span> TL
+          </div>
+        </div>
+        <button
+          id="spinButton"
+          class="bg-yellow-400 text-black px-6 py-2 rounded hover:bg-yellow-300 font-semibold mt-2"
+        >
+          Çevir
+        </button>
+        <p id="slotResult" class="mt-4 text-lg text-gray-300"></p>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-center py-6 text-sm text-gray-400 mt-auto">
+      © 2025 CasinoX | 18+ | Lütfen Sorumlu Oynayın
+    </footer>
+  </body>
+
+  <script>
+    const reel1 = document.getElementById("reel1");
+    const reel2 = document.getElementById("reel2");
+    const reel3 = document.getElementById("reel3");
+    const spinButton = document.getElementById("spinButton");
+    const slotResult = document.getElementById("slotResult");
+    const slotBet = document.getElementById("slotBet");
+    const slotBalanceSpan = document.getElementById("slotBalance");
+
+    let slotBalance = 1000;
+    const symbols = [
+      "🍒",
+      "🍋",
+      "🔔",
+      "🍊",
+      "⭐",
+      "💎",
+      "👑",
+      "🍀",
+      "🍇",
+      "🍉",
+      "🍓",
+    ];
+    const weights = [9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 10];
+    function getRandomSymbol() {
+      const rand = Math.floor(Math.random() * 100);
+      let sum = 0;
+      for (let i = 0; i < weights.length; i++) {
+        sum += weights[i];
+        if (rand < sum) return symbols[i];
+      }
+    }
+
+    spinButton.addEventListener("click", function () {
+      const bet = parseInt(slotBet.value, 10);
+      if (isNaN(bet) || bet < 1) {
+        slotResult.textContent = "Geçerli bir bahis girin!";
+        return;
+      }
+      if (bet > slotBalance) {
+        slotResult.textContent = "Yetersiz bakiye!";
+        return;
+      }
+
+      slotResult.textContent = "Çarklar dönüyor...";
+      let spinCount = 0;
+      const maxSpin = 15;
+
+      const spinInterval = setInterval(() => {
+        reel1.textContent = getRandomSymbol();
+        reel2.textContent = getRandomSymbol();
+        reel3.textContent = getRandomSymbol();
+        spinCount++;
+        if (spinCount >= maxSpin) {
+          clearInterval(spinInterval);
+
+          // Çarkları Döndür
+
+          const s1 = getRandomSymbol();
+          const s2 = getRandomSymbol();
+          const s3 = getRandomSymbol();
+          reel1.textContent = s1;
+          reel2.textContent = s2;
+          reel3.textContent = s3;
+
+          //   Sonucu Kontrol Et
+          if (s1 === s2 && s2 === s3) {
+            const win = bet * 25;
+            slotBalance += win;
+            slotResult.textContent = `Tebrikler! ${win} TL kazandınız!`;
+          } else if (s1 === s2 || s2 == s3 || s1 === s3) {
+            const win = bet * 3;
+            slotBalance += win;
+            slotResult.textContent = `İkili eşleşme! ${win} TL kazandınız!`;
+          } else {
+            slotBalance -= bet;
+            slotResult.textContent = `${bet} TL kaybettiniz.`;
+          }
+          slotBalanceSpan.textContent = slotBalance;
+        }
+      }, 70);
+    });
+  </script>
+</html>
